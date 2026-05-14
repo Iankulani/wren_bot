@@ -1,0 +1,14 @@
+# Minimal Alpine Dockerfile
+FROM alpine:3.19
+
+RUN apk add --no-cache python3 py3-pip nmap curl wget netcat-openbsd bind-tools whois hydra
+
+RUN pip3 install --no-cache-dir requests paramiko psutil cryptography scapy colorama whois qrcode pyshorteners discord.py telethon slack-sdk aiohttp
+
+WORKDIR /app
+COPY wren_bot.py .
+
+RUN mkdir -p .wren_bot && python3 -c "import sqlite3" 2>/dev/null || true
+
+EXPOSE 8080
+CMD ["python3", "wren_bot.py"]

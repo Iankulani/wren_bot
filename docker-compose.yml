@@ -1,0 +1,38 @@
+# ============================================
+# AWESOME WREN BOT - Docker Compose
+# ============================================
+
+version: '3.8'
+
+services:
+  wren-bot:
+    build: .
+    container_name: awesome-wren-bot
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - wren_data:/app/.wren_bot
+      - wren_reports:/app/reports
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=UTC
+    networks:
+      - wren-network
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    command: python3 wren_bot.py
+
+volumes:
+  wren_data:
+    driver: local
+  wren_reports:
+    driver: local
+
+networks:
+  wren-network:
+    driver: bridge

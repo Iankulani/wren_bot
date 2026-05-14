@@ -1,0 +1,113 @@
+# ============================================
+# AWESOME WREN BOT - Dockerfile (Alpine Linux)
+# Author: Ian Carter Kulani, MSc
+# ============================================
+
+FROM alpine:3.19
+
+LABEL maintainer="Ian Carter Kulani"
+LABEL description="AWESOME WREN BOT - Multi-Platform Cybersecurity Command Center"
+LABEL version="1.0.0"
+
+# Install system dependencies
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    python3 \
+    py3-pip \
+    py3-virtualenv \
+    nmap \
+    nmap-scripts \
+    curl \
+    wget \
+    netcat-openbsd \
+    bind-tools \
+    whois \
+    hydra \
+    tcpdump \
+    libpcap \
+    libpcap-dev \
+    gcc \
+    musl-dev \
+    linux-headers \
+    libffi-dev \
+    openssl-dev \
+    make \
+    sudo \
+    bash \
+    git \
+    nmap-nping \
+    nmap-ncat \
+    tshark \
+    nikto \
+    arping \
+    fping \
+    hping3 \
+    macchanger \
+    dsniff && \
+    rm -rf /var/cache/apk/*
+
+# Install Python packages
+RUN pip3 install --upgrade pip setuptools wheel && \
+    pip3 install \
+    requests \
+    paramiko \
+    psutil \
+    cryptography \
+    scapy \
+    colorama \
+    whois \
+    qrcode \
+    pyshorteners \
+    discord.py \
+    telethon \
+    slack-sdk \
+    google-api-python-client \
+    google-auth-httplib2 \
+    google-auth-oauthlib \
+    aiohttp \
+    beautifulsoup4 \
+    lxml
+
+# Create working directory
+WORKDIR /app
+
+# Create non-root user
+RUN adduser -D -h /app wrenbot && \
+    chown -R wrenbot:wrenbot /app
+
+# Copy application
+COPY --chown=wrenbot:wrenbot wren_bot.py .
+COPY --chown=wrenbot:wrenbot requirements.txt .
+
+# Create necessary directories
+RUN mkdir -p .wren_bot/payloads \
+    .wren_bot/workspaces \
+    .wren_bot/scans \
+    .wren_bot/nikto_results \
+    .wren_bot/whatsapp_session \
+    .wren_bot/phishing_pages \
+    reports \
+    .wren_bot/traffic_logs \
+    .wren_bot/phishing_templates \
+    .wren_bot/captured_credentials \
+    .wren_bot/ssh_keys \
+    .wren_bot/ssh_logs \
+    .wren_bot/time_history \
+    .wren_bot/wordlists \
+    .wren_bot/web_static \
+    .wren_bot/api_keys \
+    .wren_bot/sessions && \
+    chown -R wrenbot:wrenbot .wren_bot reports
+
+# Switch to non-root user
+USER wrenbot
+
+# Expose ports
+EXPOSE 8080 8080/tcp
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/ || exit 1
+
+# Set entry point
+ENTRYPOINT ["python3", "wren_bot.py"]
