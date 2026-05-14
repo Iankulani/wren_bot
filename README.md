@@ -14,7 +14,8 @@
 
 AWESOME WREN BOT is a comprehensive cybersecurity orchestration platform designed specifically for white hat hackers, penetration testers, security analysts, and ethical security researchers. This powerful tool serves as a centralized command center that enables security professionals to detect, analyze, respond to, and document cybersecurity incidents across multiple communication channels simultaneously.
 
-Core Capabilities
+# Core Capabilities
+
 # 🛡️ Incident Response & Threat Detection
 When a cyber attack occurs, every second counts. The Wren Bot empowers white hat hackers to respond immediately from anywhere in the world. Whether you're receiving an alert about a potential breach, detecting suspicious network activity, or investigating an ongoing attack, Wren Bot puts full-spectrum security controls at your fingertips. The system actively monitors network traffic, detects anomalies, identifies potential threats, and enables instant countermeasures through its integrated response engine.
 
@@ -39,15 +40,15 @@ This means you can initiate port scans, launch vulnerability assessments, genera
 # 📊 Reporting & Research Documentation
 Professional cybersecurity requires meticulous documentation. Wren Bot automatically logs every command, captures all outputs, timestamps every action, and generates comprehensive security reports. The tool maintains an extensive history of all activities, making it invaluable for:
 
-Penetration Testing Reports – Document findings with evidence
+* Penetration Testing Reports – Document findings with evidence
 
-Incident Response Documentation – Track every action taken during an incident
+* Incident Response Documentation – Track every action taken during an incident
 
-Vulnerability Assessments – Catalog discovered weaknesses
+* Vulnerability Assessments – Catalog discovered weaknesses
 
-Compliance Audits – Demonstrate security testing procedures
+* Compliance Audits – Demonstrate security testing procedures
 
-Research Projects – Record methodologies and results
+* Research Projects – Record methodologies and results
 
 # 🔬 Research & Analysis Tools
 For security researchers and ethical hackers, Wren Bot provides a laboratory of testing tools:
@@ -87,3 +88,20 @@ The AWESOME WREN BOT is designed exclusively for:
 * Defense against actual cyber attacks on your own infrastructure
 
 Users are responsible for complying with all applicable laws and obtaining proper authorization before testing any system.
+
+
+# How to clone the repo
+```bash
+git clone https://github.com/Iankulani/wren_bot.git
+cd wren_bot
+```
+# How to run
+```bash
+python wren_bot.py
+```
+  
+
+# Star History
+
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Iankulani/wren_bot&type=Date)](https://star-history.com/#Iankulani/wren_bot&Date)
